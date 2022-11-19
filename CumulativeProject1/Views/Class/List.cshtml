@@ -1,0 +1,18 @@
+﻿@model IEnumerable<CumulativeProject1.Models.Class>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<p>This page should be showing information about all classes.</p>
+
+
+@foreach (var Class in Model)
+{
+    <div><a href="/Class/Show/@Class.ClassId"> @Class.ClassCode @Class.ClassName </a></div>
+
+}
+
+
+
+
