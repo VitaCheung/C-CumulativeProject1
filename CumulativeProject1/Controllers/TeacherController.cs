@@ -34,5 +34,82 @@ namespace CumulativeProject1.Controllers
 
             return View(NewTeacher);
         }
+
+        //GET: /Teacher/New
+        public ActionResult New()
+        {
+            return View();
+
+        }
+
+        //GET: /Teacher/DeleteConfirm/{id}
+        public ActionResult DeleteConfirm(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher NewTeacher = controller.FindTeacher(id);
+
+
+            return View(NewTeacher);
+        }
+        //POST : /Teacher/Delete/{id}
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            controller.DeleteTeacher(id);
+            return RedirectToAction("List");
+        }
+
+        //POST : /Teacher/Create
+        [HttpPost]
+        public ActionResult Create(int TeacherId, string TeacherFname, string TeacherLname, string EmployeeNumber, DateTime HireDate, decimal Salary)
+        {
+            if (TeacherId == null)
+            {
+                return RedirectToAction("New");
+            }
+            if (TeacherFname == null)
+            {
+                return RedirectToAction("New");
+            }
+            if (TeacherLname == null)
+            {
+                return RedirectToAction("New");
+            }
+            if (EmployeeNumber == null)
+            {
+                return RedirectToAction("New");
+            }
+            if (HireDate == null)
+            {
+                return RedirectToAction("New");
+            }
+            if (Salary == null)
+            {
+                return RedirectToAction("New");
+            }
+
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherId = TeacherId;
+            NewTeacher.TeacherFname = TeacherFname;
+            NewTeacher.TeacherLname = TeacherLname;
+            NewTeacher.EmployeeNumber = EmployeeNumber;
+            NewTeacher.HireDate = HireDate;
+            NewTeacher.Salary = Salary;
+
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.AddTeacher(NewTeacher);
+
+
+            return RedirectToAction("List");
+            
+            
+               
+        }
+
+        
+
+        
     }
 }

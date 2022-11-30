@@ -10,7 +10,7 @@ namespace CumulativeProject1.Models
         public int TeacherId;
         public string TeacherFname;
         public string TeacherLname;
-        public object EmployeeNumber;
+        public string EmployeeNumber;
         public DateTime HireDate;
         public decimal Salary;
 
