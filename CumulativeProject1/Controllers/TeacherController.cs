@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CumulativeProject1.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace CumulativeProject1.Controllers
 {
@@ -108,6 +110,33 @@ namespace CumulativeProject1.Controllers
                
         }
 
+        //GET:/Teacher/Edit/{id}
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            TeacherDataController MyController = new TeacherDataController();
+            Teacher SelectedTeacher = MyController.FindTeacher(id);
+
+
+            //Views/Teacher/Edit.cshtml
+            return View(SelectedTeacher);
+        }
+
+        [HttpPost]
+        public ActionResult Update(int id, string TeacherFname, string TeacherLname, string EmployeeNumber, DateTime HireDate, decimal Salary)
+        {
+            Teacher TeacherInfo = new Teacher();
+            TeacherInfo.TeacherFname = TeacherFname;
+            TeacherInfo.TeacherLname = TeacherLname;
+            TeacherInfo.EmployeeNumber = EmployeeNumber;
+            TeacherInfo.HireDate = HireDate;
+            TeacherInfo.Salary = Salary;
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.UpdateTeacher(id, TeacherInfo);
+
+            return RedirectToAction("Show/" + id);
+        }
         
 
         
